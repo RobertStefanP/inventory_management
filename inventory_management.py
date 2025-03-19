@@ -44,27 +44,27 @@ class Producto:
         
 class Inventario:
     def __init__(self):
-        self._inventario = [] # Lista para almacenar productos
+        self._inventario = [] 
         
-    def agregar_producto(self, producto): # Método para agregar producto
+    def agregar_producto(self, producto): 
         if not self.producto_existente(producto.get_nombre()):
             self._inventario.append(producto)
-            return True # Retorna True para indicar que el producto fue agregado
+            return True 
         return False 
         
-    def producto_existente(self, nombre_producto): # Método para verificar si el producto ya existe
+    def producto_existente(self, nombre_producto): 
         for producto in self._inventario:
             if producto.get_nombre().lower() == nombre_producto.lower():
                 return True
         return False    
 
-    def mostrar_inventario(self):  # Método para mostrar inventario
+    def mostrar_inventario(self):  
         if not self._inventario:
             return None
         else:
-            return self._inventario  # Retorna la lista de productos en el inventario
+            return self._inventario  
                 
-    def actualizar_producto(self, nombre_producto, nuevo_precio=None, nueva_cantidad=None): # Método para actualizar producto
+    def actualizar_producto(self, nombre_producto, nuevo_precio=None, nueva_cantidad=None): 
         for producto in self._inventario:
             if producto.get_nombre().lower() == nombre_producto.lower():
                 if nuevo_precio is not None:
@@ -74,18 +74,18 @@ class Inventario:
                 return producto
         return None
 
-    def eliminar_producto(self, nombre_producto): # Método para eliminar producto
+    def eliminar_producto(self, nombre_producto): 
         for producto in self._inventario:
             if producto.get_nombre().lower() == nombre_producto.lower():
                 self._inventario.remove(producto)
                 return True
         return False
     
-    def buscar_producto(self, nombre_producto):  # Método para buscar producto
+    def buscar_producto(self, nombre_producto):  
         for producto in self._inventario:
             if producto.nombre == nombre_producto:
-                return producto # Retorna el objeto producto si se encuentra
-        return None # Retorna None si el producto no se encuentra
+                return producto 
+        return None 
 
 inventario = Inventario()  
             
@@ -105,23 +105,24 @@ while True:
                      
         if opcion == 1:                    
             while not volver_al_menu:                
-                nombre = input("  Introduzca el produco que desea agregar: ") # no puede haber caracteres especiales, espacios o numeros
+                nombre = input("  Introduzca el produco que desea agregar: ") 
                 if inventario.producto_existente(nombre):  
                     print("\n--ERROR! El producto ya existe en el inventario.")                                                         
                     while True:
-                        print("  Intentar con otro producto o volver al menu principal?\n  1 -Intentar con otro producto.\n  2 -Volver al menu principal.\n")
+                        print("  Elija opcion:")
+                        print("  1 -Intentar con otro producto.\n  2 -Volver al menu principal.\n")
                         opcion = input("  Opcion 1 o 2: ")
                         if opcion == "1":
                             break
                         elif opcion == "2":
                             print("Volviendo al menú principal")
                             nombre = None 
-                            volver_al_menu = True  # Salir del bucle principal                              
+                            volver_al_menu = True                                
                             break
                         else:
                             print("--ERROR! Opcion no valida, elegir 1 o 2.")
                             continue
-                    if volver_al_menu:  # Si el flag fue activado, salir del bucle principal
+                    if volver_al_menu:  
                         break
                 else:    
                     if re.fullmatch(r"[a-zA-Z0-9\s]+", nombre) and nombre.strip() != "":
@@ -147,7 +148,7 @@ while True:
                                 print("Volviendo al menú principal")
                                 categoria = None
                                 volver_al_menu = True
-                                break  # Salir del bucle de reintento                                                                       
+                                break                                                                        
                             else:
                                 print("--ERROR! Elija 1 o 2.")
                                 continue 
@@ -156,86 +157,85 @@ while True:
                         break  
                                                                      
                 if nombre and categoria and not volver_al_menu:  
-                    while not volver_al_menu: # Solicitar el precio del producto
+                    while not volver_al_menu:
                         try:                                    
                             precio = input("\n  Precio del producto: ")                     
                             if int(precio) > 0 and precio.isnumeric():
                                 break 
                             else:                                
-                                while True: # Ofrecer al usuario la opción de reintentar o salir al menú principal
+                                while True: 
                                     print("1 -Reintentar\n2 -Volver al menu principal")
                                     reintentar_o_menu = input("\n   Opcion 1 o 2: ")
 
                                     if reintentar_o_menu == "1":
-                                        break  # Reintentar ingresar el precio
+                                        break  
                                     elif reintentar_o_menu == "2":
                                         print("Volviendo al menu principal.")
                                         precio = None
                                         volver_al_menu = True
-                                        break  # Salir del bucle de reintento
+                                        break  
                                     else:
                                         print("--ERROR! Elija 1 o 2")
-                                        continue  # Volver a solicitar la opción correcta    
+                                        continue      
                                                                         
-                            if volver_al_menu: # Si el usuario eligió volver al menú principal
+                            if volver_al_menu: 
                                 break    
                             
                         except ValueError:
                             print("\n--ERROR! Introducir un valor numerico valido.")   
                                                                                 
-                            while True: # Ofrecer al usuario la opción de reintentar o salir al menú principal
+                            while True: 
                                 print("1 -Reintentar \n2 -Volver al menu principal")
                                 reintentar_o_menu = input("\n   Opción 1 o 2: ")
 
                                 if reintentar_o_menu == "1":
-                                    break  # Reintentar ingresar el precio
+                                    break  
                                 elif reintentar_o_menu == "2":
                                     print("Volviendo al menu principal.")
                                     precio = None
                                     volver_al_menu = True
-                                    break  # Salir del bucle de reintento
+                                    break  
                                 else:
                                     print("--ERROR! Opcion no valida, elija 1 o 2.")
-                                    continue  # Volver a solicitar la opción correcta 
+                                    continue  
                                      
                     if precio is not None and not volver_al_menu:
-                        cantidad = None  # Inicializa la variable para evitar NameError
-                        while not volver_al_menu:  # Solicitar la cantidad del producto
+                        cantidad = None  
+                        while not volver_al_menu:  
                             try:
                                 cantidad = float(input("\n  Introduzca la cantidad: ")) 
                                 if cantidad > 0:
-                                    break  # Cantidad válida, salir del bucle principal de cantidad
+                                    break  
                                 else:
                                     print("--ERROR! La cantidad no puede ser 0 o negativa.")
                             
-                                    # Ofrecer al usuario la opción de reintentar o salir al menú principal
                                     while True:  
                                         print("\n  Reintentar introducir cantidad o salir al menú principal?")
                                         print("1 -Reintentar introducir cantidad\n2 -Volver al menú principal")
                                         reintentar_o_menu = input("\n   Opción 1 o 2: ")
 
                                         if reintentar_o_menu == "1":                                            
-                                            break  # Si elige reintentar, salir del bucle interno y volver al inicio del bucle principal
+                                            break 
                                         elif reintentar_o_menu == "2":
                                             print("Volviendo al menú principal.")
-                                            cantidad = None  # Para evitar que pase al siguiente paso
+                                            cantidad = None  
                                             volver_al_menu = True
-                                            break  # Salir del bucle de reintento y del bucle principal
+                                            break  
                                         else:
                                             print("--ERROR! Opción no válida, elija 1 o 2.")
-                                            continue  # Volver a solicitar la opción correcta                            
+                                            continue                              
                                 if volver_al_menu:
                                     break                                
                             except ValueError:
                                 print("--ERROR! Introducir un valor numerico valido.")
                                 
                     if precio is not None and cantidad is not None:
-                        producto = Producto(nombre, categoria, precio, cantidad)  # Crear el objeto producto
-                        if inventario.agregar_producto(producto):  # Agregar el producto al inventario y verificar si se agregó con éxito
+                        producto = Producto(nombre, categoria, precio, cantidad)  
+                        if inventario.agregar_producto(producto):  
                             print(f"\nProducto '{nombre}' agregado correctamente al inventario.") 
                         else:
                             print(f"--ERROR! El producto '{producto.get_nombre()}' ya existe en el inventario.")                             
-                        inventario.mostrar_inventario()  # Mostrar el inventario actualizado     
+                        inventario.mostrar_inventario()  
                                                                  
         elif opcion ==2:                                                       
             while not volver_al_menu:
@@ -279,7 +279,8 @@ while True:
                         break                                 
                     else:
                         while True: 
-                            print("\n--ERROR! Producto no encontrado, reintentar a actualizar producto o salir al menu principal?\n 1 -Reintentar actualizar producto.\n 2 -Volver al menu principal.")
+                            print("\n--ERROR! Producto no encontrado, reintentar a actualizar producto o salir al menu principal?")
+                            print("\n 1 -Reintentar actualizar producto.\n 2 -Volver al menu principal.")
                             reintento_o_menuprincipal = input("\n   Opcion 1 o 2: ")
                             if reintento_o_menuprincipal == "1":                                
                                 break
@@ -319,36 +320,36 @@ while True:
                     break                    
                            
         elif opcion == 4:
-            inventario_actual = inventario.mostrar_inventario()  # Llama al método mostrar_inventario y almacena el resultado            
-            if not inventario_actual: # Si el inventario está vacío, mostrar mensaje de error
+            inventario_actual = inventario.mostrar_inventario()            
+            if not inventario_actual: 
                 print("\n  El inventario está vacío.")                
             else:                
                 print("\n  Inventario:")
                 for producto in inventario_actual:
-                    producto.mostrar_info()  # Utiliza el método mostrar_info() para cada producto
+                    producto.mostrar_info()  
                     
         elif opcion == 5:
             while not volver_al_menu:                
                 nombre_producto = input("  Introduzca el nombre del producto que desea buscar: ")
-                producto = inventario.buscar_producto(nombre_producto) # Buscar el producto en el inventario
-                if producto: # Mostrar la información del producto si se encuentra                        
-                    producto.mostrar_info() # Llamar al método mostrar_info() del objeto producto
-                    break  # Salir del bucle ya que el producto fue encontrado y mostrado
+                producto = inventario.buscar_producto(nombre_producto) 
+                if producto:                      
+                    producto.mostrar_info() 
+                    break  
                 
-                else: # Producto no encontrado, ofrecer al usuario la opción de reintentar o salir                        
+                else:                         
                     while True:
                         print("\n--ERROR! Producto no encontrado, reintentar o salir al menú principal?\n 1 -Reiniciar la busqueda\n 2 -Volver al menú principal")
                         reintento_o_menuprincipal = input("\n   Opción 1 o 2: ")
                         if reintento_o_menuprincipal == "1":
-                            break  # Volver a solicitar el nombre del producto
+                            break  
                         elif reintento_o_menuprincipal == "2":
                             volver_al_menu = True
                             print("Volviendo al menú principal.")
-                            break  # Salir al menú principal
+                            break  
                         else:
                             print("--ERROR! Opción no válida, elige 1 o 2.")
                             continue
-                if volver_al_menu:  # Verificar si debe salir al menú principal
+                if volver_al_menu:  
                     break           
                                         
         elif opcion == 6:  
