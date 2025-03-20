@@ -1,4 +1,5 @@
 Today, I saw a <adjective> <animal> at the zoo.  
 It <verb_past_tense> into the <place> and vanished!  
 The zookeeper <verb_past_tense_2> and called for help.  
-What a crazy day!  
+People screamed, and animals ran everywhere!  
+What a <adjective_2> day!  
